@@ -40,11 +40,11 @@ function Folder({ explorer, handleInsertNode }) {
                     { showInput.visible && (
                         <div className = "inputContainer">
                             <span>{showInput.isFolder ? "📁" : "📄"}</span>
-                            <input 
-                                type="text" 
-                                className="inputContainerInput" 
-                                autoFocus 
-                                onBlur={() => { setShowInput({ visible: false, isFolder: false }) }} 
+                            <input
+                                type="text"
+                                className="inputContainerInput"
+                                autoFocus
+                                onBlur={() => { setShowInput({ visible: false, isFolder: false }) }}
                                 onKeyDown={handleNewFolder}
                             ></input>
                         </div>
@@ -68,4 +68,10 @@ function Folder({ explorer, handleInsertNode }) {
     
 }
 
+// This Folder component represents a folder or file in a file explorer UI.
+// It uses state to manage whether the folder is expanded and whether the input for adding a new folder or file is visible.
+// The handleNewFolder function is triggered when the user presses "Enter" to add a new item.
+// The handleAddFolder function manages the visibility of the input field for adding new folders or files.
+// The component recursively renders child folders, allowing for a nested folder structure.
+// The visual representation includes icons for folders and files, enhancing user experience.
 export default Folder;
