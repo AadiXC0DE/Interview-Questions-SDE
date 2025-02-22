@@ -1,37 +1,41 @@
 import { useState } from "react";
 
 function Folder({ explorer, handleInsertNode }) {
+    // State to manage folder expansion and input visibility
     const [expand, setExpand] = useState(false);
     const [showInput, setShowInput] = useState({
         visible: false,
         isFolder: false
     });
 
+    // Function to handle the creation of a new folder or file
     const handleNewFolder = (e) => {
+        // Check if the Enter key is pressed and input is not empty
         if (e.key === "Enter" && e.target.value) {
             handleInsertNode(explorer.id, e.target.value, showInput.isFolder );
             setShowInput({...showInput, visible: false});
         }
     };
 
+    // Function to show input for adding a new folder or file
     const handleAddFolder = (e, isFolder) => {
-        e.stopPropagation();
-        setExpand(true);
+        e.stopPropagation(); // Prevent event bubbling
+        setExpand(true); // Expand the folder
         setShowInput({
             visible: true,
-            isFolder: isFolder
+            isFolder: isFolder // Set type of new item (folder or file)
         });
     }
 
-    console.log( 'folder data', explorer);
+    console.log( 'folder data', explorer); // Debugging output for folder data
 
     if(explorer.isFolder){
         return (
             <div style={{marginTop: "5px"}}>
-    
                 <div className = "folder" onClick={()=>setExpand(!expand)} style={{cursor: "pointer"}}>
                     <span>🗂️ {explorer.name}</span> 
                     <div>
+                        {/* Buttons to add new folder or file */}
                         <button className = "btn" onClick={(e)=>handleAddFolder(e, true)} onKeyDown={(e)=>handleAddFolder(e, true)}>Folder +</button>
                         <button className = "btn" onClick={(e)=>handleAddFolder(e, false)} onKeyDown={(e)=>handleAddFolder(e, false)}>File +</button>
                     </div>
@@ -55,17 +59,14 @@ function Folder({ explorer, handleInsertNode }) {
                         )
                     })}
                 </div>
-    
             </div>
         )
-
     }
     else{
         return (
                 <span className = "file">🗒️ {explorer.name}</span>
         )
     }
-    
 }
 
 // This Folder component represents a folder or file in a file explorer UI.
